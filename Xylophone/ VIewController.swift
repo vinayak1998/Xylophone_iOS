@@ -2,32 +2,46 @@
 //  ViewController.swift
 //  Xylophone
 //
-//  Created by Angela Yu on 27/01/2016.
-//  Copyright © 2016 London App Brewery. All rights reserved.
+//  Created by Vinayak Rastogi on 09/12/2017.
+//
 //
 
 import UIKit
-import AVFoundation   // for tapping into audio functionalites
+import AVFoundation
 
 class ViewController: UIViewController, AVAudioPlayerDelegate {
     
     var audioPlayer : AVAudioPlayer!
-
+    let soundArray = ["note1", "note2", "note3", "note4", "note5", "note6", "note7"]
+    var selectedSoundFileName = ""
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
-
-
+    
+    
+    
     @IBAction func notePressed(_ sender: UIButton) {
         
-        let soundURL = Bundle.main.url(forResource: "note1", withExtension: "wav") //sets up the location of where our file is
+        selectedSoundFileName = soundArray[sender.tag - 1]
+        
+        print(selectedSoundFileName)
+        
+        playSound()
+        
+    }
+    
+    func playSound() {
+        
+        let soundURL = Bundle.main.url(forResource: selectedSoundFileName, withExtension: "wav")
         
         audioPlayer = try! AVAudioPlayer(contentsOf: soundURL!)
+        
         audioPlayer.play()
     }
     
-  
-
+    
+    
 }
 
