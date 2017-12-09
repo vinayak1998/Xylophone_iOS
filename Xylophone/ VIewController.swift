@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import AVFoundation   // for tapping into audio functionalites
 
-class ViewController: UIViewController{
+class ViewController: UIViewController, AVAudioPlayerDelegate {
     
+    var audioPlayer : AVAudioPlayer!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,8 +21,10 @@ class ViewController: UIViewController{
 
     @IBAction func notePressed(_ sender: UIButton) {
         
+        let soundURL = Bundle.main.url(forResource: "note1", withExtension: "wav") //sets up the location of where our file is
         
-        
+        audioPlayer = try! AVAudioPlayer(contentsOf: soundURL!)
+        audioPlayer.play()
     }
     
   
